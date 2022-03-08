@@ -5,11 +5,15 @@ import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ShowPlayer from "./ShowPlayer";
+import SelectedPlayer from "./SelectedPlayer";
 
 function App() {
   const [searchValue1, setSearchValue1] = useState("");
   const [searchValue2, setSearchValue2] = useState("");
+  const [selectedDisplay, setSelectedDisplay] = useState("block");
+  const [selectedDisplay2, setSelectedDisplay2] = useState("block");
   const [selectedPlayer1, setSelectedPlayer1] = useState([]);
+  const [selectedPlayer2, setSelectedPlayer2] = useState([]);
   const [dropdownDisplay, setDropdownDisplay] = useState("none");
   const [dropdownDisplay2, setDropdownDisplay2] = useState("none");
   const [background, setBackground] = useState("white");
@@ -88,7 +92,14 @@ function App() {
 
   function addPlayer(player) {
     console.log(player);
+    setSelectedPlayer1(player);
+    setSelectedDisplay("block");
+    if (selectedPlayer1 !== []) {
+      setSelectedPlayer2(player);
+      setDropdownDisplay2("block");
+    }
   }
+  console.log(selectedPlayer1, selectedPlayer2);
 
   return (
     <div className="App">
@@ -104,7 +115,15 @@ function App() {
         <SearchPlayer
           filterPlayer={filterPlayer2}
           players={showingPlayers2}
+          addPlayer={addPlayer}
           dropdownDisplay={dropdownDisplay2}
+        />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <SelectedPlayer player={players[0]} selectedDisplay={selectedDisplay} />
+        <SelectedPlayer
+          player={players[1]}
+          selectedDisplay={selectedDisplay2}
         />
       </div>
     </div>

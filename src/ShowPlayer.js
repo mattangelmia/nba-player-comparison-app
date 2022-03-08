@@ -18,7 +18,6 @@ export default function ShowPlayer(props) {
         <div className="box" key={index}>
           <Dropdown>
             <Dropdown.Item
-              href="#/action-1"
               style={{ borderBottom: "1px solid lightGray" }}
               onClick={() => props.addPlayer(player)}
             >
